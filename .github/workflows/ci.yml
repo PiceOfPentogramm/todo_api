@@ -23,3 +23,15 @@ jobs:
         with:
           push: true
           tags: piceofpentogramm/fastapi-demo:latest
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker pull piceofpentogramm/fastapi-demo:latest
+            docker stop fastapi || true
+            docker rm fastapi || true
+            docker run -d -p 8000:8000 --name fastapi piceofpentogramm/fastapi-demo:latest
