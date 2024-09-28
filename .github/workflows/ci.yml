@@ -5,9 +5,8 @@ on:
     branches: [ master ]
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -24,6 +23,10 @@ jobs:
           push: true
           tags: piceofpentogramm/fastapi-demo:latest
 
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.0
         with:
