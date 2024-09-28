@@ -21,7 +21,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: piceofpentogramm/fastapi-demo:latest
+          tags: piceofpentogramm/ToDo_API:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull piceofpentogramm/fastapi-demo:latest
+            docker pull piceofpentogramm/ToDo_API:latest
             docker stop fastapi || true
             docker rm fastapi || true
-            docker run -d -p 8000:8000 --name fastapi piceofpentogramm/fastapi-demo:latest
+            docker run -d -p 8000:8000 --name fastapi piceofpentogramm/ToDo_API:latest
