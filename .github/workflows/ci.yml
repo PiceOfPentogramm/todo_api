@@ -38,3 +38,12 @@ jobs:
             docker stop fastapi || true
             docker rm fastapi || true
             docker run -d -p 8000:8000 --name fastapi piceofpentogramm/todo_api:latest
+
+  health-check:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Check API health
+        run: |
+          sleep 10
+          curl --fail http://${{ secrets.SSH_HOST }}:8000/health
