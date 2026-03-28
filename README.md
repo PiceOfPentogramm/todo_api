@@ -27,11 +27,6 @@ Every push to `master` triggers:
 | DELETE | `/todos/{id}` | Delete todo |
 | GET | `/health` | Health check |
 
-## Live Demo
-
-API: `http://178.72.171.208:8000`  
-Docs: `http://178.72.171.208:8000/docs`
-
 ## Run locally
 ```bash
 docker pull piceofpentogramm/todo-api:latest
